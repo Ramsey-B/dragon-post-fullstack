@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     this._server.getPosts();
     this._postService.cast.subscribe(posts => {
       this.posts = posts;
-      debugger
       console.log(posts)
     })
   }

@@ -14,8 +14,8 @@ namespace dragon_post.Repositories
     public Post CreatePost(Post newPost)
     {
       int id = _db.ExecuteScalar<int>(@"
-                INSERT INTO posts (title, body, authorId)
-                VALUES (@Title, @Body, @AuthorId);
+                INSERT INTO posts (title, body, img, authorId)
+                VALUES (@Title, @Body, @img, @AuthorId);
                 SELECT LAST_INSERT_ID();
             ", newPost);
       newPost.Id = id;
@@ -52,7 +52,8 @@ namespace dragon_post.Repositories
       var i = _db.Execute(@"
                 UPDATE posts SET
                     title = @Title,
-                    body = @Body
+                    body = @Body,
+                    img = @Img
                 WHERE id = @Id
                 AND authorId = @AuthorId
             ", post);

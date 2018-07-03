@@ -1,7 +1,14 @@
 <div class='container-fluid'>
-  <div class='row'>
-    <div class='col-sm-9 body-content'>
-      <router-outlet></router-outlet>
+  <nav class="navbar navbar-light top-header">
+    <div>
+      <a class="navbar-brand">Home</a>
+      <a class="navbar-brand">Favorites</a>
     </div>
-  </div>
+    <a class="navbar-brand" (click)="login()">Sign up/Login</a>
+    <div class="d-flex flex-column">
+      <!-- <a class="navbar-brand">User: {{user.name}}</a> -->
+      <a class="navbar-brand">Sign out</a>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
 </div>
