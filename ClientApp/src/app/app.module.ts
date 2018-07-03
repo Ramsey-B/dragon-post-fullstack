@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
-import { UserComponent } from './Components/user/user.component';
 import { FullpostComponent } from './Components/fullpost/fullpost.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -45,6 +44,6 @@ import { AccountComponent } from './Components/account/account.component';
     ])
   ],
   providers: [DataService, PostService, UserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, HomeComponent, AccountComponent]
 })
 export class AppModule { }

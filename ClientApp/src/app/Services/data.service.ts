@@ -31,6 +31,7 @@ export class DataService {
       .pipe(map(res => res.json())).subscribe(u => {
         if(u != null) {
           this._userService.updateUser(u);
+          debugger
           this._router.navigate(['/']);
         } else {
           this._router.navigate(['account']);
