@@ -3,10 +3,8 @@
     <h1>home</h1>
     <div *ngFor="let post of posts" class="card post">
       <div class="card container-fluid center">
-        <div class="card-body">
-          <a>
-            <h4>{{post.title}}</h4>
-          </a>
+        <div class="card-body" [routerLink]="['post/', post.id]">
+          <h4>{{post.title}}</h4>
           <!-- <img :src="post.img" alt=""> -->
           <p>{{post.body}}</p>
           <!-- <button v-if="post.userId == user._id" @click="deletePost(post)">Delete</button>

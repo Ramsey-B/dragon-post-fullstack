@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs"
 import { Post } from '../Models/Post'
+import { Tag } from '../Models/Tag';
 
 @Injectable()
 export class PostService {
   private posts = new BehaviorSubject<Post[]>(null);
   cast = this.posts.asObservable();
+  private currentPost = new BehaviorSubject<Post>(null);
+  castCurrentPost = this.currentPost.asObservable();
+  private tags = new BehaviorSubject<Tag[]>(null);
+  castTags = this.tags.asObservable();
 
   constructor() { }
 
@@ -13,7 +18,15 @@ export class PostService {
 
   }
 
+  setCurrentPost(post:Post) {
+    this.currentPost.next(post);
+  }
+
   updatePosts(newPosts){
     this.posts.next(newPosts);
+  }
+
+  updateTags(tags:Tag[]){
+    this.tags.next(tags)
   }
 }

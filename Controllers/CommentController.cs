@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dragon_post.Controllers
 {
-  [Route("[controller]")]
+  [Route("api/[controller]")]
   public class CommentController : Controller 
   {
     private readonly CommentRepository _db;

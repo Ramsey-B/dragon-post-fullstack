@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dragon_post.Controllers
 {
-  [Route("[controller]")]
+  [Route("api/[controller]")]
   public class PostController : Controller
   {
     private readonly PostRepository _db;

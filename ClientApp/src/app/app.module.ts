@@ -34,7 +34,7 @@ import { AccountComponent } from './Components/account/account.component';
         component: HomeComponent
       },
       {
-        path: 'post',
+        path: 'post/:id',
         component: FullpostComponent
       },
       {
@@ -44,6 +44,6 @@ import { AccountComponent } from './Components/account/account.component';
     ])
   ],
   providers: [DataService, PostService, UserService],
-  bootstrap: [AppComponent, HomeComponent, AccountComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

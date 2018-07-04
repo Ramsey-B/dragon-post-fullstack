@@ -9,7 +9,7 @@ import { UserService } from './user.service'
 @Injectable()
 export class DataService {
 
-  private baseUrl = "//localhost:5000/";
+  private baseUrl = "//localhost:5000/api/";
   HttpOptions = {
     withCredentials: true,
     timeout: 3000
@@ -26,12 +26,18 @@ export class DataService {
       })
   }
 
+  getPost(id:number) {
+    this.http.get(this.baseUrl + 'post/' + id, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(post => {
+        this._postService.setCurrentPost(post);
+      })
+  }
+
   authenticate() {
     this.http.get(this.baseUrl + "account/authenticate", this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(u => {
         if(u != null) {
           this._userService.updateUser(u);
-          debugger
           this._router.navigate(['/']);
         } else {
           this._router.navigate(['account']);
@@ -51,6 +57,13 @@ export class DataService {
       .pipe(map(res => res.json())).subscribe(u => {
         this._userService.updateUser(u.data)
         console.log(u)
+      })
+  }
+
+  getTags(id: number) {
+    this.http.get(this.baseUrl + 'tag/' + id, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(tags => {
+        this._postService.updateTags(tags);
       })
   }
 
