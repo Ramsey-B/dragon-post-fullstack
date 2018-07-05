@@ -13,15 +13,32 @@ namespace dragon_post.Repositories
     public Tag AddTag(Tag newTag, string userId, int postId)
     {
       Post post = _db.QueryFirstOrDefault<Post>("SELECT * FROM posts WHERE id = @postId;", new { postId });
-      if(post.AuthorId == userId) 
+      if (post.AuthorId == userId)
       {
         int id = _db.ExecuteScalar<int>(@"
                 INSERT INTO tags (name, postId)
                 VALUES (@Name, @PostId);
                 SELECT LAST_INSERT_ID();
             ", newTag);
-      newTag.Id = id;
-      return newTag;
+        newTag.Id = id;
+        return newTag;
+      }
+      return null;
+    }
+
+    public IEnumerable<Tag> AddTags(List<Tag> tags, string userId, int postId)
+    {
+      Post post = _db.QueryFirstOrDefault<Post>("SELECT * FROM posts WHERE id = @postId;", new { postId });
+      if (post.AuthorId == userId)
+      {
+        int num = _db.Execute(@"
+                INSERT INTO tags (name, postId)
+                VALUES (@Name, @PostId);
+            ", tags);
+        if (num > 0)
+        {
+          return tags;
+        }
       }
       return null;
     }

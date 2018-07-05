@@ -27,6 +27,18 @@ namespace dragon_post.Controllers
       return null;
     }
 
+    [HttpPost("multi/{id}")]
+    [Authorize]
+    public IEnumerable<Tag> AddTags([FromBody]List<Tag> tags, int id)
+    {
+      var user = HttpContext.User.Identity.Name;
+      if(ModelState.IsValid)
+      {
+        return _db.AddTags(tags, user, id);
+      }
+      return null;
+    }
+
     [HttpGet("{id}")]
     public IEnumerable<Tag> GetPostsTags(int id)
     {
