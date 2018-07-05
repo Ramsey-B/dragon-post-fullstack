@@ -67,4 +67,11 @@ export class DataService {
       })
   }
 
+  createPost(newPost: Post, tags: string[]) {
+    this.http.post(this.baseUrl + 'post', newPost, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(post => {
+        this.http.post(this.baseUrl + 'tag/multi/' +post.id, tags, this.HttpOptions)
+        this._postService.addPost(post)
+      })
+  }
 }

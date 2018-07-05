@@ -26,6 +26,10 @@ export class PostService {
     this.posts.next(newPosts);
   }
 
+  addPost(post: Post) {
+    this.posts.value.unshift(post);
+  }
+
   updateTags(tags:Tag[]){
     this.tags.next(tags)
   }

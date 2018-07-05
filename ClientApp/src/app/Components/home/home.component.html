@@ -3,13 +3,12 @@
     <form (ngSubmit)="createPost()">
       <input type="text" [(ngModel)]="post.Title" name="title" placeholder="Title">
       <input type="text" [(ngModel)]="post.Body" name="body" placeholder="Body">
-      <input type="text" [(ngModel)]="post.Img" name="img" placeholder="Image Url">
-      <button class="btn btn-success" (click)="toggleTags()">Add Tag</button>
-      <div *ngIf="tagBool">
+      <input type="url" [(ngModel)]="post.Img" name="img" placeholder="Image Url">
+      <p>Tags: <span *ngFor="let tag of tags; let i = index">{{tag}} <a (click)="removeTag(i)">x</a><span *ngIf="i < tags.length-1">,</span> </span></p>
         <form (ngSubmit)="addTag()">
-          
+          <input type="text" [(ngModel)]="tag" name="tag" placeholder="Tag">
+          <button class="btn btn-success" type="submit">+</button>
         </form>
-      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

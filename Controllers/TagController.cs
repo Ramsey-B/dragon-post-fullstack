@@ -19,6 +19,7 @@ namespace dragon_post.Controllers
     [Authorize]
     public Tag AddTag([FromBody]Tag newTag, int id)
     {
+      newTag.Name.Replace(" ", "+");
       var user = HttpContext.User.Identity.Name;
       if(ModelState.IsValid)
       {
@@ -31,6 +32,9 @@ namespace dragon_post.Controllers
     [Authorize]
     public IEnumerable<Tag> AddTags([FromBody]List<Tag> tags, int id)
     {
+      tags.ForEach(tag => {
+        tag.Name.Replace(" ", "+");
+      });
       var user = HttpContext.User.Identity.Name;
       if(ModelState.IsValid)
       {
