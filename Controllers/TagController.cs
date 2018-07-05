@@ -15,13 +15,14 @@ namespace dragon_post.Controllers
       _db = repo;  
     }
 
-    [HttpPost]
+    [HttpPost("{id}")]
     [Authorize]
-    public Tag AddTag([FromBody]Tag newTag)
+    public Tag AddTag([FromBody]Tag newTag, int id)
     {
+      var user = HttpContext.User.Identity.Name;
       if(ModelState.IsValid)
       {
-        return _db.AddTag(newTag);
+        return _db.AddTag(newTag, user, id);
       }
       return null;
     }

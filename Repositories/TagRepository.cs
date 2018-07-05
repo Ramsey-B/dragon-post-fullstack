@@ -10,15 +10,20 @@ namespace dragon_post.Repositories
     public TagRepository(IDbConnection db) : base(db)
     {
     }
-    public Tag AddTag(Tag newTag)
+    public Tag AddTag(Tag newTag, string userId, int postId)
     {
-      int id = _db.ExecuteScalar<int>(@"
+      Post post = _db.QueryFirstOrDefault<Post>("SELECT * FROM posts WHERE id = @postId;", new { postId });
+      if(post.AuthorId == userId) 
+      {
+        int id = _db.ExecuteScalar<int>(@"
                 INSERT INTO tags (name, postId)
                 VALUES (@Name, @PostId);
                 SELECT LAST_INSERT_ID();
             ", newTag);
       newTag.Id = id;
       return newTag;
+      }
+      return null;
     }
 
     public IEnumerable<Tag> GetPostsTags(int postId)
