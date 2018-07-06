@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   posts: Post[];
   currentUser: User;
   tagBool: boolean = false;
+  postBool: boolean = false;
   tags = [];
   tag: string = "";
   post = {
@@ -40,6 +41,10 @@ export class HomeComponent implements OnInit {
     this.tagBool = !this.tagBool;
   }
 
+  togglePosts() {
+    this.postBool = !this.postBool;
+  }
+
   addTag() {
     this.tags.push(this.tag);
     this.tag = ""
@@ -63,5 +68,9 @@ export class HomeComponent implements OnInit {
       Img: ""
     }
     this.tags = []
+  }
+
+  deletePost(id: number) {
+    this._server.deletePost(id);
   }
 }

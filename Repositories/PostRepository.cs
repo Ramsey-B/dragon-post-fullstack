@@ -64,13 +64,14 @@ namespace dragon_post.Repositories
       return null;
     }
 
-    public bool DeletePost(int id)
+    public bool DeletePost(int id, string authorId)
     {
       var i = _db.Execute(@"
       DELETE FROM posts
       WHERE id = @id
+      AND authorId = @authorId
       LIMIT 1;
-      ", new { id });
+      ", new { id, authorId });
       if (i > 0)
       {
         return true;

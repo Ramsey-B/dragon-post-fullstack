@@ -63,5 +63,6 @@
 
   --   FOREIGN KEY (postId)
   --     REFERENCES posts(id)
+  --     ON DELETE CASCADE
   -- )
 

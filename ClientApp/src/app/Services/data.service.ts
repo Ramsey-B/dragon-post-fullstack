@@ -74,4 +74,11 @@ export class DataService {
         this._postService.addPost(post)
       })
   }
+
+  deletePost(id: number) {
+    this.http.delete(this.baseUrl + 'post/' +id, this.HttpOptions)
+    .pipe(map(res => res.json())).subscribe(post => {
+      this._postService.removePost(id)
+    })
+  }
 }

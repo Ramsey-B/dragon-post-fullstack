@@ -65,14 +65,10 @@ namespace dragon_post.Controllers
 
     [HttpDelete("{id}")]
     [Authorize]
-    public string DeletePost(int id)
+    public bool DeletePost(int id)
     {
-      bool delete = _db.DeletePost(id);
-      if (delete)
-      {
-        return "Successfully Deleted!";
-      }
-      return "An Error Occurred, try again!";
+      var user = HttpContext.User.Identity.Name;
+      return _db.DeletePost(id, user);
     }
   }
 }

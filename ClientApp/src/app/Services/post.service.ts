@@ -33,4 +33,11 @@ export class PostService {
   updateTags(tags:Tag[]){
     this.tags.next(tags)
   }
+
+  removePost(id: number) {
+    var i = this.posts.value.findIndex(post => {
+      return post.id == id;
+    })
+    this.posts.value.splice(i, 1);
+  }
 }

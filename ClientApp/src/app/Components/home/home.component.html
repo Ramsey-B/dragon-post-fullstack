@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12">
-    <form (ngSubmit)="createPost()">
+    <button class="btn-primary" (click)="togglePosts()">Add Post</button>
+    <form (ngSubmit)="createPost()" *ngIf="postBool">
       <input type="text" [(ngModel)]="post.Title" name="title" placeholder="Title">
       <input type="text" [(ngModel)]="post.Body" name="body" placeholder="Body">
       <input type="url" [(ngModel)]="post.Img" name="img" placeholder="Image Url">
@@ -12,16 +13,18 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-12 text-center" *ngIf="!postBool">
     <h1>home</h1>
     <div *ngFor="let post of posts" class="card post">
       <div class="card container-fluid center">
-        <div class="card-body" [routerLink]="['post/', post.id]">
-          <h4>{{post.title}}</h4>
-          <!-- <img :src="post.img" alt=""> -->
-          <p>{{post.body}}</p>
-          <!-- <button v-if="post.userId == user._id" @click="deletePost(post)">Delete</button>
-          <div v-if="user._id">
+        <div class="card-body">
+          <div [routerLink]="['post/', post.id]">
+              <h4>{{post.title}}</h4>
+              <!-- <img :src="post.img" alt=""> -->
+              <p>{{post.body}}</p>
+          </div>
+          <button v-if="post.authorId == currentUser.id" (click)="deletePost(post.id)">Delete</button>
+          <!-- <div v-if="user._id">
             <button @click="favPost(post)" v-if="!(user.favorites.includes(post._id))">
               <i class="far fa-star"></i>
             </button>
