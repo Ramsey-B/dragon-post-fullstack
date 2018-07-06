@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   tagBool: boolean = false;
   postBool: boolean = false;
   tags = [];
-  tag: string = "";
+  tag = {
+    Name: ""
+  }
   post = {
     Title: "",
     Body: "",
@@ -46,8 +48,11 @@ export class HomeComponent implements OnInit {
   }
 
   addTag() {
-    this.tags.push(this.tag);
-    this.tag = ""
+    var newTag = this.tag
+    this.tags.unshift(newTag)
+    this.tag = {
+      Name: ""
+    }
   }
 
   removeTag(i) {
@@ -68,6 +73,9 @@ export class HomeComponent implements OnInit {
       Img: ""
     }
     this.tags = []
+    this.tag = {
+      Name: ""
+    }
   }
 
   deletePost(id: number) {

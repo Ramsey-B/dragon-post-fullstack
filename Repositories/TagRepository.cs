@@ -31,6 +31,10 @@ namespace dragon_post.Repositories
       Post post = _db.QueryFirstOrDefault<Post>("SELECT * FROM posts WHERE id = @postId;", new { postId });
       if (post.AuthorId == userId)
       {
+        tags.ForEach(tag => {
+          tag.PostId = post.Id;
+          tag.Name = tag.Name.Replace(' ', '+');
+        });
         int num = _db.Execute(@"
                 INSERT INTO tags (name, postId)
                 VALUES (@Name, @PostId);

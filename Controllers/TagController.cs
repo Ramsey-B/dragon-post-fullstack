@@ -12,7 +12,7 @@ namespace dragon_post.Controllers
     private readonly TagRepository _db;
     public TagController(TagRepository repo)
     {
-      _db = repo;  
+      _db = repo;
     }
 
     [HttpPost("{id}")]
@@ -21,7 +21,7 @@ namespace dragon_post.Controllers
     {
       newTag.Name.Replace(" ", "+");
       var user = HttpContext.User.Identity.Name;
-      if(ModelState.IsValid)
+      if (ModelState.IsValid)
       {
         return _db.AddTag(newTag, user, id);
       }
@@ -32,11 +32,8 @@ namespace dragon_post.Controllers
     [Authorize]
     public IEnumerable<Tag> AddTags([FromBody]List<Tag> tags, int id)
     {
-      tags.ForEach(tag => {
-        tag.Name.Replace(" ", "+");
-      });
       var user = HttpContext.User.Identity.Name;
-      if(ModelState.IsValid)
+      if (ModelState.IsValid)
       {
         return _db.AddTags(tags, user, id);
       }
@@ -54,7 +51,7 @@ namespace dragon_post.Controllers
     public string RemoveTag(int id)
     {
       bool result = _db.RemoveTag(id);
-      if(result)
+      if (result)
       {
         return "Tag Successfully Removed!";
       }

@@ -67,12 +67,19 @@ export class DataService {
       })
   }
 
-  createPost(newPost: Post, tags: string[]) {
+  createPost(newPost, tags) {
+    debugger
     this.http.post(this.baseUrl + 'post', newPost, this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(post => {
-        this.http.post(this.baseUrl + 'tag/multi/' +post.id, tags, this.HttpOptions)
+        this.addTags(post, tags)
         this._postService.addPost(post)
       })
+  }
+
+  addTags(post, tags) {
+    debugger
+    this.http.post(this.baseUrl + 'tag/multi/' +post.id, tags, this.HttpOptions)
+    .pipe(map(res => res.json())).subscribe(t => {console.log(t)})
   }
 
   deletePost(id: number) {

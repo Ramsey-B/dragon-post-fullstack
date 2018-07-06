@@ -14,13 +14,15 @@ import { DataService } from './Services/data.service';
 import { PostService } from './Services/post.service';
 import { UserService } from './Services/user.service';
 import { AccountComponent } from './Components/account/account.component';
+import { CommentComponent } from './Components/comment/comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FullpostComponent,
-    AccountComponent
+    AccountComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
