@@ -4,6 +4,7 @@ namespace dragon_post.Models
   {
     public int Id { get; set; }
     public string Body { get; set; }
+    public string Img { get; set; }
     public string AuthorId { get; set; }
     public int PostId { get; set; }
   }

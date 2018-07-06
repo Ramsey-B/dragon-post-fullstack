@@ -24,6 +24,7 @@ export class FullpostComponent implements OnInit {
     if (this._router.isActive) {
       this._server.getPost(this.postId)
       this._server.getTags(this.postId);
+      this._server.getComments(this.postId);
       this._postService.castCurrentPost.subscribe(post => {
         this.post = post;
         console.log(post)

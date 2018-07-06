@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-12">
+    <form (ngSubmit)="createComment()">
+      <input type="text" [(ngModel)]="comment.Body" name="body" placeholder="Body">
+      <input type="url" [(ngModel)]="comment.Img" name="img" placeholder="Image Url">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div *ngFor="let c of comments">
+      <p>{{c.body}}</p>
+    </div>
+  </div>
+</div>

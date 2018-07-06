@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { PostService} from './post.service';
 import { Router } from '@angular/router';
 import { UserService } from './user.service'
+import { CommentService } from './comment.service';
 
 @Injectable()
 export class DataService {
@@ -15,7 +16,7 @@ export class DataService {
     timeout: 3000
   };
 
-  constructor(private http:Http, private _postService:PostService, private _router:Router, private _userService:UserService) { 
+  constructor(private http:Http, private _postService:PostService, private _router:Router, private _userService:UserService, private _commentService: CommentService) { 
     console.log("connected to server...");
   }
 
@@ -87,5 +88,19 @@ export class DataService {
     .pipe(map(res => res.json())).subscribe(post => {
       this._postService.removePost(id)
     })
+  }
+
+  getComments(id: number) {
+    this.http.get(this.baseUrl + 'comment/post/' +id, this.HttpOptions)
+    .pipe(map(res => res.json())).subscribe(comments => {
+      this._commentService.updateComments(comments)
+    })
+  }
+
+  createComment(comment: object) {
+    this.http.post(this.baseUrl + 'comment', comment, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(comment => {
+        this._commentService.addComment(comment);
+      })
   }
 }

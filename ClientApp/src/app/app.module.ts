@@ -15,6 +15,8 @@ import { PostService } from './Services/post.service';
 import { UserService } from './Services/user.service';
 import { AccountComponent } from './Components/account/account.component';
 import { CommentComponent } from './Components/comment/comment.component';
+import { CommentsComponent } from './Components/comments/comments.component';
+import { CommentService } from './Services/comment.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { CommentComponent } from './Components/comment/comment.component';
     HomeComponent,
     FullpostComponent,
     AccountComponent,
-    CommentComponent
+    CommentsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,7 +47,7 @@ import { CommentComponent } from './Components/comment/comment.component';
       }
     ])
   ],
-  providers: [DataService, PostService, UserService],
+  providers: [DataService, PostService, UserService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
